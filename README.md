@@ -1,8 +1,8 @@
-# SHOPS
+# Proxy
 
 ## Description:
 
-Server app to fetch, save and serve newspapers infos
+Simple http proxy
 
 ## Requirements:
 
@@ -11,10 +11,9 @@ Server app to fetch, save and serve newspapers infos
 
 ## How to run our application ( in development mode )
 
-At first please install NodeJS and Docker on your machine, after that please run below commands:
+At first please install NodeJS, after that please run below commands:
 ```
 npm install
-npm run db
 npm run dev
 ```
 
@@ -22,8 +21,8 @@ npm run dev
 
 At first please install NodeJS and Docker on your machine, after that please run below commands:
 ```
-npm install
-npm run build 
-npm run db
-npm start
+docker build . -t proxy-image
+docker run -d --restart=always -p 3000:9001 --name proxy-container proxy-image
+docker stop proxy-container // when we want to stop it
+docker rm proxy-container   // when we want to remove the container
 ```
