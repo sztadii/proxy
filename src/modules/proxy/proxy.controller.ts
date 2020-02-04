@@ -1,7 +1,7 @@
 import * as express from 'express'
 import * as requestProxy from 'express-request-proxy'
 import * as path from 'path'
-import { decodeString, encodeString } from '../../helpers/security-helpers'
+import { decodeString } from '../../helpers/security-helpers'
 
 const router = express.Router()
 
@@ -10,17 +10,15 @@ router.get('/template', (req, res, next) => {
 })
 
 router.get('*', (req, res, next) => {
-  const { url } = req.query
-  const cookieKey = process.env.OLD_URL_COOKIE_KEY
-  const oldUrl = req.cookies[cookieKey]
+  const cookieKey = process.env.URL_COOKIE_KEY
+  const url = req.cookies[cookieKey]
 
-  const encodeUrl = oldUrl && decodeString(oldUrl)
-  const requestedPath = encodeUrl && !url ? `${encodeUrl}/*` : `${url}/*`
-
-  if (url) {
-    const encodeUrl = encodeString(url)
-    res.cookie(cookieKey, encodeUrl)
+  if (!url) {
+    res.redirect('/template')
   }
+
+  const encodeUrl = decodeString(url)
+  const requestedPath = `${encodeUrl}/*`
 
   return requestProxy({ url: requestedPath })(req, res, next)
 })

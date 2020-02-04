@@ -4,8 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "build": "npm run clean-build && npm run transpile-ts && npm run copy-html",
+    "clean-build": "rm -rf dist",
+    "transpile-ts": "tsc",
+    "copy-html": "copyfiles src/**/*.html dist",
+    "start": "node dist/src/index.js",
     "dev": "nodemon -L --exec ts-node -- src/index.ts",
     "format": "prettier --config .prettierrc --ignore-path .gitignore --write '**/*.{ts,js,json}'",
     "lint-staged": "lint-staged"
@@ -46,6 +49,7 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "copyfiles": "^2.2.0",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
     "nodemon": "^2.0.2",

@@ -21,6 +21,8 @@
     const { value } = e.target.url
     const encodeValue = window.btoa(value)
     document.cookie = `old-url = ${encodeValue}`
+
+    window.open('/')
   })
 </script>
 </body>
