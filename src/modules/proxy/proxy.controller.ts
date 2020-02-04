@@ -11,19 +11,23 @@ router.get('/template', (req, res, next) => {
 
 router.get('*', (req, res, next) => {
   const cookieKey = process.env.URL_COOKIE_KEY
-  const proxyUrl = process.env.PROXY_URL
-  const url = req.cookies[cookieKey]
+  const urlFromEnv = process.env.PROXY_URL
+  const encodedUrlFromCookie = req.cookies[cookieKey]
 
-  if (!url && !proxyUrl) {
+  const hasAnyUrl = encodedUrlFromCookie || urlFromEnv
+
+  if (!hasAnyUrl) {
     res.redirect('/template')
   }
 
-  const encodeUrl = decodeBase64(url)
-  const requestedPath = proxyUrl ? `${proxyUrl}/*` : `${encodeUrl}/*`
+  const urlFromCookie = decodeBase64(encodedUrlFromCookie)
+  const requestedPath = urlFromEnv ? `${urlFromEnv}/*` : `${urlFromCookie}/*`
 
   // Please keep it, useful during errors
-  console.log('encodeUrl', encodeUrl)
+  console.log('urlFromEnv', urlFromEnv)
+  console.log('urlFromCookie', urlFromCookie)
   console.log('requestedPath', requestedPath)
+  console.log('---')
 
   return requestProxy({ url: requestedPath })(req, res, next)
 })
