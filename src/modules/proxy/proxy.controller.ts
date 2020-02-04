@@ -1,15 +1,8 @@
 import * as express from 'express'
 import * as requestProxy from 'express-request-proxy'
+import { decodeString, encodeString } from '../../helpers/security-helpers'
 
 const router = express.Router()
-
-function encodeString(text: string): string {
-  return Buffer.from(text).toString('base64')
-}
-
-function decodeString(text: string): string {
-  return Buffer.from(text, 'base64').toString('ascii')
-}
 
 router.get('*', (req, res, next) => {
   const { url } = req.query
