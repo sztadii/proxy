@@ -11,14 +11,15 @@ router.get('/template', (req, res, next) => {
 
 router.get('*', (req, res, next) => {
   const cookieKey = process.env.URL_COOKIE_KEY
+  const proxyUrl = process.env.PROXY_URL
   const url = req.cookies[cookieKey]
 
-  if (!url) {
+  if (!url && !proxyUrl) {
     res.redirect('/template')
   }
 
   const encodeUrl = decodeBase64(url)
-  const requestedPath = `${encodeUrl}/*`
+  const requestedPath = proxyUrl ? `${proxyUrl}/*` : `${encodeUrl}/*`
 
   return requestProxy({ url: requestedPath })(req, res, next)
 })
