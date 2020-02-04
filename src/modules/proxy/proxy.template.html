@@ -3,26 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Template</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
-<form>
-  URL: <input type="text" name="url" required>
-  <input type="submit" value="Submit">
-</form>
-
+<div class="container my-5">
+  <form>
+    <div class="form-group">
+      <label for="url">URL</label>
+      <input type="text" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter URL">
+      <small id="urlHelp" class="form-text text-muted">Please be sure the address is valid for example https://google.pl</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Open</button>
+  </form>
+</div>
 
 <script>
   const form = document.querySelector('form')
+  let lastOpenedWindow;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()
 
+    if (lastOpenedWindow) {
+      lastOpenedWindow.close()
+    }
+
     const { value } = e.target.url
     const encodeValue = window.btoa(value)
-    document.cookie = `old-url = ${encodeValue}`
 
-    window.open('/')
+    document.cookie = `old-url = ${encodeValue}`
+    e.target.reset()
+    lastOpenedWindow = window.open('/')
   })
 </script>
 </body>
