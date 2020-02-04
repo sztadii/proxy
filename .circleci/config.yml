@@ -1,25 +1,39 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12.1.0
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/node:12.1.0
-
-    working_directory: ~/repo
-
+    <<: *defaults
     steps:
       - checkout
-
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-{{ checksum "package-lock.json" }}
             - v1-dependencies-
-
       - run: npm ci
-
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
       - run: npm run build
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
       - run: ssh -oStrictHostKeyChecking=no -v root@128.199.58.186 < .circleci/deploy
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
