@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template</title>
+</head>
+<body>
+
+<form>
+  URL: <input type="text" name="url" required>
+  <input type="submit" value="Submit">
+</form>
+
+
+<script>
+  const form = document.querySelector('form')
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const { value } = e.target.url
+    const encodeValue = window.btoa(value)
+    document.cookie = `old-url = ${encodeValue}`
+  })
+</script>
+</body>
+</html>
