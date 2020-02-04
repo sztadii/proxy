@@ -1,7 +1,7 @@
-import * as express from 'express'
-import * as requestProxy from 'express-request-proxy'
-import * as path from 'path'
-import { decodeString } from '../../helpers/security-helpers'
+import express from 'express'
+import requestProxy from 'express-request-proxy'
+import path from 'path'
+import { decodeBase64 } from '../../helpers/security-helpers'
 
 const router = express.Router()
 
@@ -17,7 +17,7 @@ router.get('*', (req, res, next) => {
     res.redirect('/template')
   }
 
-  const encodeUrl = decodeString(url)
+  const encodeUrl = decodeBase64(url)
   const requestedPath = `${encodeUrl}/*`
 
   return requestProxy({ url: requestedPath })(req, res, next)
