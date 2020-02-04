@@ -1,4 +1,4 @@
-FROM node:10.1.0
+FROM node:12.1.0
 
 WORKDIR /www
 
@@ -8,7 +8,7 @@ COPY .env ./
 COPY tsconfig.json ./
 COPY src ./src
 
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 EXPOSE 4000
