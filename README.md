@@ -22,7 +22,7 @@ npm run dev
 At first please install NodeJS and Docker on your machine, after that please run below commands:
 ```
 docker build . -t proxy-image
-docker run -d --restart=always -p 3000:9001 --name proxy-container proxy-image
+docker run -d --restart=always -p 8080:4000 --name proxy-container proxy-image
 docker stop proxy-container // when we want to stop it
 docker rm proxy-container   // when we want to remove the container
 ```
