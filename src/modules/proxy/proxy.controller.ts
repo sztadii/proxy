@@ -21,6 +21,10 @@ router.get('*', (req, res, next) => {
   const encodeUrl = decodeBase64(url)
   const requestedPath = proxyUrl ? `${proxyUrl}/*` : `${encodeUrl}/*`
 
+  // Please keep it, useful during errors
+  console.log('encodeUrl', encodeUrl)
+  console.log('requestedPath', requestedPath)
+
   return requestProxy({ url: requestedPath })(req, res, next)
 })
 

@@ -26,3 +26,8 @@ docker run -d --restart=always -p 8080:4000 --name proxy-container proxy-image
 docker stop proxy-container // when we want to stop it
 docker rm proxy-container   // when we want to remove the container
 ```
+
+When you want to override some env variable then please run:
+```
+docker run -e "PROXY_URL=https://app.moja-e-gazetka.pl" -d --restart=always -p 9000:4000 --name news-proxy-container proxy-image
+```
