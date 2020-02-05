@@ -9,7 +9,9 @@ ssh root@999.999.99.999
 
 Create first ssh key with ssh-keygen -t rsa -b 4096 -C "sztadii@gmail.com”
 
-Copy your public keys with
+It will generate `id_rsa` and `id_rsa.pub`
+
+Copy your public key with
 ```
 pbcopy < ~/.ssh/id_rsa.pub
 ```
@@ -18,10 +20,10 @@ or
 cat ~/.ssh/id_rsa.pub
 ```
 
-Add public key from VPS for Github
+Add your already copied key from VPS for Github
 https://github.com/settings/ssh/new
 
-Go to droplet via ssh and clone the repo in a correct folder via
+Go to droplet via SSH and clone the repo in a correct folder by
 ```
 git clone https://github.com/sztadii/shop.git
 ```
