@@ -19,4 +19,4 @@ jobs:
           ssh-private-key: ${{ secrets.GITHUB_PRIVATE_KEY }}
       - run: npm ci
       - run: npm run build
-      - run: ssh -oStrictHostKeyChecking=no -v ${{ secrets.DIGITAL_OCEAN_VPS_USER_DOMAIN }} "cd projects/proxy && docker stop proxy-container && docker rm proxy-container && git pull && docker build . -t proxy-image && docker run -d --restart=always -p 8080:4000 --name proxy-container proxy-image"
+      - run: ssh -oStrictHostKeyChecking=no -v ${{ secrets.DIGITAL_OCEAN_VPS_USER_DOMAIN }} < deploy
