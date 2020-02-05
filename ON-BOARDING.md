@@ -1,4 +1,4 @@
-# ONBOARDING WEB APP
+# ON-BOARDING
 
 Create a droplet with Docker on Digital Ocean
 
