@@ -1,0 +1,22 @@
+name: Build and deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.GITHUB_PRIVATE_KEY }}
+      - run: npm ci
+      - run: npm run build
+      - run: ssh -oStrictHostKeyChecking=no -v ${{ secrets.DIGITAL_OCEAN_VPS_USER_DOMAIN }} "cd projects/proxy && docker stop proxy-container && docker rm proxy-container && git pull && docker build . -t proxy-image && docker run -d --restart=always -p 8080:4000 --name proxy-container proxy-image"
