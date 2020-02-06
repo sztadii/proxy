@@ -17,7 +17,7 @@ router.get('*', (req, res, next) => {
   const hasAnyUrl = encodedUrlFromCookie || urlFromEnv
 
   if (!hasAnyUrl) {
-    res.redirect('/template')
+    return res.redirect('/template')
   }
 
   const urlFromCookie = decodeBase64(encodedUrlFromCookie)
