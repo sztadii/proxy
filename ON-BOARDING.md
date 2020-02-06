@@ -48,7 +48,7 @@ cat ~/.ssh/id_rsa_circleci.pub
 nano ~/.ssh/authorized_keys
 ```
 
-PS. When you want to add more key each of them needs to be in a separate file
+PS. When you want to add more key each of them needs to be in a separate line
 
 Then add the private key to Github 
 https://github.com/sztadii/proxy/settings/secrets
