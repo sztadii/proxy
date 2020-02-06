@@ -26,8 +26,9 @@ cat ~/.ssh/id_rsa.pub
 Add your already copied key from VPS for Github
 https://github.com/settings/ssh/new
 
-Go to droplet via SSH and clone the repo in a correct folder by
+Go to droplet via SSH and clone the repo in a `./project` folder by
 ```
+cd projects &&
 git clone git@github.com:sztadii/proxy.git
 ```
 
