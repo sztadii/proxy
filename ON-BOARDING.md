@@ -7,7 +7,10 @@ Login to your VPS via SSH
 ssh root@999.999.99.999
 ```
 
-Create first ssh key with ssh-keygen -t rsa -b 4096 -C "sztadii@gmail.com”
+Create first ssh key with
+```
+ssh-keygen -t rsa -b 4096 -C "sztadii@gmail.com"
+```
 
 It will generate `id_rsa` and `id_rsa.pub`
 
@@ -25,7 +28,7 @@ https://github.com/settings/ssh/new
 
 Go to droplet via SSH and clone the repo in a correct folder by
 ```
-git clone https://github.com/sztadii/shop.git
+git clone git@github.com:sztadii/proxy.git
 ```
 
 Create keys specific for your Github CI machine
@@ -50,6 +53,10 @@ nano ~/.ssh/authorized_keys
 
 PS. When you want to add more key each of them needs to be in a separate line
 
+Copy the private key
+```
+pbcopy < ~/.ssh/id_rsa_github
+```
 Then add the private key to Github 
 https://github.com/sztadii/proxy/settings/secrets
 
