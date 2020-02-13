@@ -9,7 +9,7 @@
     "transpile-ts": "tsc",
     "copy-html": "copyfiles src/**/*.html dist",
     "start": "node dist/src/index.js",
-    "dev": "nodemon -L --exec ts-node -- src/index.ts",
+    "dev": "nodemon src/index.ts",
     "format": "prettier --config .prettierrc --ignore-path .gitignore --write '**/*.{ts,js,json}'",
     "lint-staged": "lint-staged"
   },
