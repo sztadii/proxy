@@ -1,5 +1,8 @@
 {
   "ext": "ts,html,json",
   "exec": "ts-node",
-  "legacyWatch": true
+  "legacyWatch": true,
+  "events": {
+    "restart": "clear"
+  }
 }
