@@ -1,4 +1,4 @@
-name: Build
+name: Quality check
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  quality-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,5 +14,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - run: npm ci
-      - run: npm run build
+
+      - name: Building docker image
+        run: docker build .
