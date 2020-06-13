@@ -1,6 +1,0 @@
-cd projects/proxy
-docker-compose down
-git pull
-docker-compose build
-docker-compose up -d
-docker system prune -f
