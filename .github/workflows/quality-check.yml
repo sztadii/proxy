@@ -15,5 +15,11 @@ jobs:
         with:
           node-version: 12.x
 
+      - name: Dependency instalation
+        run: npm ci
+
+      - name: Integration tests
+        run: npm test
+
       - name: Building docker image
         run: docker build .

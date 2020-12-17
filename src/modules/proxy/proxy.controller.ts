@@ -8,7 +8,7 @@ export function renderFormTemplate(req: Request, res: Response) {
 }
 
 export function proxyHandler(req: Request, res: Response, next: NextFunction) {
-  const cookieKey = process.env.URL_COOKIE_KEY
+  const cookieKey = 'proxy-url'
   const urlFromEnv = process.env.PROXY_URL
   const encodedUrlFromCookie = req.cookies[cookieKey]
 

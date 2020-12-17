@@ -8,7 +8,7 @@
 <body>
 
 <div class="container my-5">
-  <form>
+  <form data-testid="our-proxy-form">
     <div class="form-group">
       <label for="url">URL</label>
       <input type="text" class="form-control" id="url" aria-describedby="url-help" placeholder="Enter URL">
@@ -32,7 +32,7 @@
     const { value } = e.target.url
     const encodeValue = window.btoa(value)
 
-    document.cookie = `old-url = ${encodeValue}`
+    document.cookie = `proxy-url = ${encodeValue}`
     e.target.reset()
     lastOpenedWindow = window.open('/')
   })
