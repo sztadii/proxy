@@ -3,11 +3,15 @@ import requestProxy from 'express-request-proxy'
 import path from 'path'
 import { decodeBase64 } from '../../helpers/security-helpers'
 
-export function renderFormTemplate(req: Request, res: Response) {
+export function renderFormTemplate(req: Request, res: Response): void {
   res.sendFile(path.join(__dirname + '/proxy.template.html'))
 }
 
-export function proxyHandler(req: Request, res: Response, next: NextFunction) {
+export function proxyHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
   const cookieKey = 'proxy-url'
   const urlFromEnv = process.env.PROXY_URL
   const encodedUrlFromCookie = req.cookies[cookieKey]
