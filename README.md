@@ -2,7 +2,13 @@
 
 ## Description:
 
-Simple http proxy
+Simple http proxy.
+
+## Modes
+
+- via form - helpful when you want just open proxy website
+- via env variable - when you want to run your proxy service that is pointing to static URL
+
 
 ## Requirements:
 
