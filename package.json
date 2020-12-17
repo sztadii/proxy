@@ -10,7 +10,7 @@
     "copy-html": "copyfiles src/**/*.html dist",
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
-    "format": "prettier --config .prettierrc --ignore-path .gitignore --write '**/*.{ts,js,json}'",
+    "format": "prettier --ignore-path .gitignore --write '**/*.{ts,js,json}'",
     "lint-staged": "lint-staged"
   },
   "husky": {
@@ -20,12 +20,10 @@
   },
   "lint-staged": {
     "*.ts": [
-      "prettier --config .prettierrc --write --",
-      "git add"
+      "prettier --write --"
     ],
     "*.{js,json}": [
-      "prettier --config .prettierrc --write --",
-      "git add"
+      "prettier --write --"
     ]
   },
   "keywords": [],
@@ -49,5 +47,19 @@
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "ts-node": "^8.6.2"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "semi": false
+  },
+  "nodemonConfig": {
+    "ext": "ts,html,json",
+    "exec": "ts-node",
+    "legacyWatch": true,
+    "events": {
+      "restart": "clear"
+    }
   }
 }
