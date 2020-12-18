@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import requestProxy from 'express-request-proxy'
 import path from 'path'
-import { decodeBase64 } from '../../helpers/security-helpers'
+import { decodeToBase64 } from '../../helpers/security-helpers'
 
 export function renderFormTemplate(req: Request, res: Response): void {
   res.sendFile(path.join(__dirname + '/proxy.template.html'))
@@ -22,7 +22,7 @@ export function proxyHandler(
     return res.redirect('/template')
   }
 
-  const urlFromCookie = decodeBase64(encodedUrlFromCookie)
+  const urlFromCookie = decodeToBase64(encodedUrlFromCookie)
   const requestedPath = urlFromEnv ? `${urlFromEnv}/*` : `${urlFromCookie}/*`
 
   // Please keep it, useful during debugging

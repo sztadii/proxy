@@ -1,7 +1,7 @@
 import { getByPlaceholderText, getByText } from '@testing-library/dom'
 import { DOMWindow, JSDOM } from 'jsdom'
 import template from './proxy.template.html'
-import { encodeBase64 } from '../../helpers/security-helpers'
+import { encodeFromBase64 } from '../../helpers/security-helpers'
 
 describe('proxy-template', () => {
   let window: DOMWindow
@@ -23,16 +23,16 @@ describe('proxy-template', () => {
     input.value = text
   }
 
-  it('when paste "https://google.com" into input and submit form then encode value into cookie', async () => {
+  it('when the input has "https://google.com" value and submitting the form then save encoded value in a cookie', async () => {
     fillFormInput('https://google.com')
 
     getByText(container, 'Open').click()
 
-    const cookies = `proxy-url=${encodeBase64('https://google.com')}`
+    const cookies = `proxy-url=${encodeFromBase64('https://google.com')}`
     expect(document.cookie).toBe(cookies)
   })
 
-  it('call window.open after successful submit form', async () => {
+  it('when submitting the form then call window.open', async () => {
     window.open = jest.fn()
 
     fillFormInput('https://google.com')
@@ -42,7 +42,7 @@ describe('proxy-template', () => {
     expect(window.open).toHaveBeenCalledWith('/')
   })
 
-  it('when input is empty and user click "Open" then trigger alert and do not open new window', async () => {
+  it('when input is empty and clicks "Open" then show alert and do not open a new window', async () => {
     window.open = jest.fn()
     window.alert = jest.fn()
 
