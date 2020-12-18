@@ -14,7 +14,7 @@ describe('proxy-controller', () => {
     const response = await request(app).get('/template')
 
     expect(response.status).toBe(200)
-    expect(response.text).toContain(`<form data-testid="our-proxy-form">`)
+    expect(response.text).toContain(`<form>`)
   })
 
   it('when we have encoded "https://google.com" in "proxy-url" cookies then redirect to "https://google.com"', async () => {
