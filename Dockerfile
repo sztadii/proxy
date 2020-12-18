@@ -8,6 +8,7 @@ COPY .env ./
 COPY tsconfig.json ./
 COPY tsconfig.build.json ./
 COPY src ./src
+COPY types ./types
 
 RUN npm ci
 RUN npm run build

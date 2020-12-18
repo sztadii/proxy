@@ -29,8 +29,7 @@ At first please install NodeJS and Docker on your machine, after that please run
 ```
 docker build . -t proxy-image
 docker run -d -p 8080:4000 --name proxy-container proxy-image
-docker stop proxy-container // when we want to stop it
-docker rm proxy-container   // when we want to remove the container
+docker stop proxy-container && docker rm proxy-container // when we want to stop and remove it
 ```
 
 When you want to override some env variable then please run:

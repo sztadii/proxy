@@ -27,5 +27,8 @@ jobs:
       - name: Integration tests
         run: npm test
 
-      - name: Building docker image
-        run: docker build .
+      - name: Building and run docker container
+        run: docker build . -t proxy-image && docker run -d -p 8080:4000 --name proxy-container proxy-image
+
+      - name: Check if service is up
+        run: curl "http://localhost:8080" &>/dev/null && echo OK || exit 1
