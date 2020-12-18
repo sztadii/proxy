@@ -4,9 +4,10 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run clean-build && npm run transpile-ts && npm run copy-html",
+    "build": "npm run clean-build && npm run transpile-project-files && npm run copy-html",
+    "ts-check": "tsc --noEmit --project ./tsconfig.json",
     "clean-build": "rm -rf dist",
-    "transpile-ts": "tsc",
+    "transpile-project-files": "tsc --project ./tsconfig.build.json",
     "copy-html": "copyfiles src/**/*.html dist",
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
