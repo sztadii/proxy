@@ -2,7 +2,7 @@ import request from 'supertest'
 import app from '../../app'
 import { encodeBase64 } from '../../helpers/security-helpers'
 
-describe('proxy', () => {
+describe('proxy-controller', () => {
   it('when we do not have "proxy-url" cookies in request then redirect to /template url', async () => {
     const response = await request(app).get('/')
 
