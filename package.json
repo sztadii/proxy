@@ -13,7 +13,8 @@
     "dev": "ts-node-dev --clear --transpile-only --watch='./**/**/*.html' src/index.ts",
     "format": "prettier --ignore-path .gitignore --write '**/*.{ts,js,html,json}'",
     "lint-staged": "lint-staged",
-    "lint": "eslint \"./src/**/*.ts\" --ext=\".ts\" --ignore-path .gitignore --color --max-warnings 0 --fix",
+    "lint": "eslint \"./src/**/*.ts\" --ext=\".ts\" --ignore-path .gitignore --color --max-warnings 0",
+    "lint-fix": "npm run lint -- --fix",
     "test": "jest --silent"
   },
   "dependencies": {
