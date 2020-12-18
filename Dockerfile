@@ -6,6 +6,7 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY .env ./
 COPY tsconfig.json ./
+COPY tsconfig.build.json ./
 COPY src ./src
 
 RUN npm ci
