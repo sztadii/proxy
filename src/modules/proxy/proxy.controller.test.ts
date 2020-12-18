@@ -1,24 +1,24 @@
 import request from 'supertest'
 import app from '../../app'
-import { encodeBase64 } from '../../helpers/security-helpers'
+import { encodeFromBase64 } from '../../helpers/security-helpers'
 
 describe('proxy-controller', () => {
-  it('when we do not have "proxy-url" cookies in request then redirect to /template url', async () => {
+  it('when the request does not have "proxy-url" cookie then redirect to /template url', async () => {
     const response = await request(app).get('/')
 
     expect(response.status).toBe(302)
     expect(response.headers.location).toBe('/template')
   })
 
-  it('when we visit /template then we return html with form', async () => {
+  it('when we visit /template url then we return html with form', async () => {
     const response = await request(app).get('/template')
 
     expect(response.status).toBe(200)
     expect(response.text).toContain(`<form>`)
   })
 
-  it('when we have encoded "https://google.com" in "proxy-url" cookies then redirect to "https://google.com"', async () => {
-    const encodedGoogleComString = encodeBase64('https://google.com')
+  it('when the request has encoded url in "proxy-url" cookie then redirect to that url', async () => {
+    const encodedGoogleComString = encodeFromBase64('https://google.com')
     const response = await request(app)
       .get('/')
       .set('Cookie', [`proxy-url=${encodedGoogleComString}`])
