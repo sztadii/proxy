@@ -1,7 +1,7 @@
 import { getByPlaceholderText, getByText } from '@testing-library/dom'
 import { DOMWindow, JSDOM } from 'jsdom'
 import template from './proxy.template.html'
-import { encodeFromBase64 } from '../../helpers/security-helpers'
+import { encodeToBase64 } from '../../helpers/security-helpers'
 
 describe('proxy-template', () => {
   let window: DOMWindow
@@ -28,7 +28,7 @@ describe('proxy-template', () => {
 
     getByText(container, 'Open').click()
 
-    const cookies = `proxy-url=${encodeFromBase64('https://google.com')}`
+    const cookies = `proxy-url=${encodeToBase64('https://google.com')}`
     expect(document.cookie).toBe(cookies)
   })
 
