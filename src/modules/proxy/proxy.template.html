@@ -11,7 +11,7 @@
   <form data-testid="our-proxy-form">
     <div class="form-group">
       <label for="url">URL</label>
-      <input type="text" class="form-control" id="url" aria-describedby="url-help" placeholder="Enter URL">
+      <input data-testid="url-input" type="text" class="form-control" id="url" placeholder="Enter URL">
       <small id="url-help" class="form-text text-muted">Make sure the address is correct, for example https://google.pl</small>
     </div>
     <button type="submit" class="btn btn-primary">Open</button>
@@ -33,6 +33,7 @@
     const encodeValue = window.btoa(value)
 
     document.cookie = `proxy-url = ${encodeValue}`
+
     e.target.reset()
     lastOpenedWindow = window.open('/')
   })
