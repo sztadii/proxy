@@ -28,7 +28,11 @@ jobs:
         run: npm test
 
       - name: Building and run docker container
-        run: docker build . -t proxy-image && docker run -d -p 8080:4000 --name proxy-container proxy-image && sleep 5
+        # We modify the PORT env to be sure that we still allow to modify our docker container's port
+        run: |
+          docker build . -t proxy-image
+          docker run -d -p 3000:1000 --env="PORT=1000" proxy-image
+          sleep 5
 
       - name: Check if service is up
-        run: curl "http://localhost:8080" &>/dev/null && echo OK || exit 1
+        run: curl "http://localhost:3000" &>/dev/null && echo OK || exit 1
