@@ -12,8 +12,8 @@ Simple http proxy.
 
 ## Requirements:
 
-- NodeJS ( min 11.0.0 ) for app serving and other development process
-- Docker - to build and get some dependencies ( like MongoDB etc )
+- NodeJS ( min 12.0.0 ) for app serving and other development process
+- Docker - if we want to build production version of the app
 
 ## How to run our application ( in development mode )
 
@@ -34,5 +34,5 @@ docker stop proxy-container && docker rm proxy-container // when we want to stop
 
 When you want to override some env variable then please run:
 ```
-docker run -e "PROXY_URL=https://app.moja-e-gazetka.pl" -d -p 9000:4000 --name news-proxy-container proxy-image
+docker run -e "PROXY_URL=https://app.moja-e-gazetka.pl" -d -p 9000:4000 proxy-image
 ```
