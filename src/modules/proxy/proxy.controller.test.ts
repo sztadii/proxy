@@ -3,15 +3,17 @@ import app from '../../app'
 import { encodeToBase64 } from '../../helpers/security-helpers'
 
 describe('proxy-controller', () => {
+  const server = request(app)
+
   it('when the request does not have "proxy-url" cookie then redirect to /template url', async () => {
-    const response = await request(app).get('/')
+    const response = await server.get('/')
 
     expect(response.status).toBe(302)
     expect(response.headers.location).toBe('/template')
   })
 
   it('when we visit /template url then we return html with form', async () => {
-    const response = await request(app).get('/template')
+    const response = await server.get('/template')
 
     expect(response.status).toBe(200)
     expect(response.text).toContain(`<form>`)
@@ -19,7 +21,7 @@ describe('proxy-controller', () => {
 
   it('when the request has encoded url in "proxy-url" cookie then redirect to that url', async () => {
     const encodedGoogleComString = encodeToBase64('https://google.com')
-    const response = await request(app)
+    const response = await server
       .get('/')
       .set('Cookie', [`proxy-url=${encodedGoogleComString}`])
 
